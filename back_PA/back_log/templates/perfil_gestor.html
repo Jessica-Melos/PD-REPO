@@ -1,0 +1,792 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" sizes="16x16" href="https://universidademv.com.br/action/favicon.png?c=60">
+    <link rel="stylesheet" href="{% static 'back_log/css/estilo_gestor.css' %}">
+    <link rel="stylesheet" href="{% static 'back_log/css/desktop.css' %}">
+    <link rel="stylesheet" href="{% static 'back_log/css/global.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+      </style>
+    
+    
+    <title>PA 2025</title>
+  </head>
+
+  <style>
+
+    body {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0,0,0,0.8)), url("{% static 'back_log/css/images/PERFIL_CURSOS.png' %}");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      width: 100vw;
+      height: 100dvh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      font-family: Poppins;
+    }
+    
+    .PA{
+        background: url("{% static 'back_log/css/images/pilha-de-livros.png' %}") no-repeat left center;
+        background-size: 20px; 
+        padding-left: 30px; 
+      }
+      
+    .PDI{
+        background: url("{% static 'back_log/css/images/leitura.png' %}") no-repeat left center;
+        background-size: 20px; 
+        padding-left: 30px; 
+        margin-top: 10px;
+      }
+    
+    .COMPETENCIAS{
+        background: url("{% static 'back_log/css/images/habilidades.png' %}") no-repeat left center;
+        background-size: 20px; 
+        padding-left: 30px; 
+        margin-top: 10px;
+      } 
+    
+      .PA, .PD, .COMPETENCIAS{
+        list-style: none;
+      }
+    /*  Header*/
+    #profile {
+        width: 100%;
+        height: 70px; 
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+      }
+     
+    </style>
+
+  <body>
+
+
+    <!--Cabeçalho: Nome do Gestor e da Diretoria-->
+    <header id="profile">
+      <div id="profile-container">
+        <img src="{% static 'back_log/css/images/Usuário.png' %}" alt="ICONE_GESTOR" class="logo_icon" />
+
+        <div class="text-logo">
+          <p class="nome_gestor"> <label for="nome_gestor">{{ gestor.name_gestor }}</label></p>
+            <p class="nome_diretoria"> <label for="diretoria_gestor">Diretoria Corporativa {{ gestor.id_diretoria.name_diretoria }}</label></p>
+    
+         
+        </div><!--Fim da text-logo-->   
+      </div><!--Fim da div#profile-container-->
+
+<div class="menu-container">
+  <button class="menu-ham" onclick="toggleMenu()">
+    <i class="fa-solid fa-bars"></i>
+  </button>
+
+  <div class="overlay-ham" onclick="closeMenu()">
+  </div>
+
+  <nav id="side-menu">
+    <button id="close-menu" onclick="closeMenu()"><i class="fa-solid fa-xmark"></i></button>
+    <a href="#" class="item-menu"><i class="fa-solid fa-house"></i><span>Início</span></a>
+    <a href="#" class="item-menu"><i class="fa-solid fa-circle-info"></i><span>Informações</span></a>
+    <a href="#" class="item-menu"><i class="fa-solid fa-book-open"></i><span title="Plano de Aprendizagem">PA</span></a>
+    <a href="#" class="item-menu"><i class="fa-solid fa-user"></i><span title="Plano de Desenvolvimento Individual">PDI</span></a>
+    <a href="#" class="item-menu"><i class="fa-solid fa-list-check"></i><span title="Mapa de Competências">MCP</span></a>
+    <a href="#" class="item-menu"><i class="fa-solid fa-envelope"></i><span>Contato</span></a>
+ 
+    <div class="logout">
+      <button onclick="logout()"><span>Logout</span>
+      <i class="fa-solid fa-right-from-bracket"></i>
+    </button>
+    </div>
+ 
+  </nav>
+ 
+
+</div>
+
+    </header>
+
+    <!--Modal de Instrução de Preenchimento e Avatar 01-->
+    <div id="logo_woman_inicial">
+        <img src="{% static 'back_log/css/images/Avatar-Instrução_01.png' %}" alt="LOGO_WOMAN" id="logo_woman" />
+    </div>
+
+
+    <!--Overlay-->
+    <div id="overlay" class="hide"></div>
+
+    <!--Popup de Instrução-->
+    <div id="modal-selection" class="hide">
+      <div id="modal-header">
+        <p class="modal-header__title">Orientações para Preenchimento do PA-2025</p>
+      </div>
+      <div id="modal-body">
+        <h2 class="modal"><b>Olá, líder! </b></h2>
+        <br>
+        <p class="instruction-01">Você deverá indicar os cursos que considera fundamentais para o desenvolvimento específico de sua equipe no Plano de Aprendizagem.
+        Lembrando que este ano, o PA já conta com cursos <b>obrigatórios para todos</b> os colaboradores,  garantindo o alinhamento
+        com as diretrizes e competências essenciais da empresa.<br><br>
+
+        Caso você possua mais de uma área sob sua responsabilidade, é necessário preencher os cursos separadamente para cada Plano de Aprendizagem (PA).
+         Para isso, selecione o PA correspondente na área de cadastro de cursos antes de incluir as informações.<br><br>
+
+              
+        Desse modo, você deve:</p>
+    
+        <ol  style="padding-left: 20px;">
+          <li>Informar os cursos que melhor atendem às necessidades do seu time, alinhando-as às competências essenciais para o desempenho das atividades.</li><br>
+          <li>Atentar-se ao limite máximo da carga horária permitido para o Plano de Desenvolvimento (PA+PDI), que é de <b>30 horas</b>. <br>Caso ultrapasse esse limite, será necessário substituir ou excluir algum dos cursos informados. </li><br>
+          <li>Após a finalização do plano, você, com apoio do BP da área, monitorará o andamento do desenvolvimento da equipe por meio desse sistema, incluindo:</li><br>
+          <ul class="PD"  style="padding-left: 35px;">
+              <li class="PA">Plano de Aprendizagem (PA)</li>
+              <li class="PDI">Plano de Desenvolvimento Individual (PDI) </li>
+              <li class="COMPETENCIAS">Mapeamento de Competências</li>
+          </ul><br>
+        </ol> 
+      </div><!--Fim da div#modal-body-->
+            
+  
+      <div id="modal-footer">
+        <button id="continue-popup">Continuar</button>    
+      </div><!--Fim da div#modal-footer-->
+    </div><!--Fim da div#modal-selection-->
+
+  
+ <!--Mapeamento de Cursos: Inserção, Lista e Carga Horária-->
+ <main role="course-mapping">
+
+    <!--Saudação-->
+    <div id="saudacao-wrapper">
+      <div id="saudacao" class="saudacao"></div>
+   </div>
+
+
+    <!--Gestor Informa o curso a ser adicionado e sua carga horária-->
+    <div id="container" style="display: none;">
+    <form id="setar_banco" method="POST" action="{% url 'setar_banco_livre' %}" >
+    {% csrf_token %}
+      
+      <h2>Cadastro de Cursos</h2>
+      <div id="input-container">
+        <span>Informe o nome do curso, sua carga horária e, em seguida, clique em Adicionar.</span>
+        <input type="text" id="curso"  placeholder="Informe o Curso" required>
+        <input type="number" id="carga" placeholder="Carga Horária" min="1" required>
+
+        <button class="botao-adicionar" onclick="adicionarCurso()">
+          <i class="fa-regular fa-plus"></i>
+        </button>
+        <div id="dropdown" class="dropdown">
+          <button type="button" class="botao-pa" onclick="toggleDropdown(event)" title="Selecione o PA">
+            <i class="fa-solid fa-book-open"></i>
+          </button>
+          <div class="dropdown-menu">
+            <a href="#" class="option-pa">Opção 1</a>
+            <a href="#" class="option-pa">Opção 2</a>
+          </div>
+
+        </div><!--Fim da div#dropdown-->
+      </div><!--Fim da div#input-container-->
+    </div><!--Fim da div#container-->
+
+    <!--Lista de Cursos para confirmação-->
+    
+    <div id="lista-container"> 
+      <h2>Lista de Cursos</h2>
+      <div id="listaCursos"></div>
+      <div id="botoes-container">
+        <button id="btnRemoverTachados" onclick="removerCursosTachados()">Excluir</button>
+        <button id="btnConfirmar" type="button" onclick="confirmarCriacao()" class="disabled" disabled>Inserir</button>
+      </div>
+    </div>
+
+  <!--Modal de Confirmação de Adição dos Cursos-->
+  <div id="popup">
+    <p>Tem certeza que deseja confirmar a adição dos cursos listados?</p>
+    <button id="btnCancelar" type="button" onclick="fecharPopup()">Cancelar</button>
+    <button id="btnConfirmarSecond" type="button" class="disabled" disabled>Confirmar</button>
+  </div>
+</form>
+</div> <!--Fim da div#lista-container-->
+
+    <!--Carga Horária-->
+    <div id="total-horas">
+      <p class="total-horas__text"><strong>Total de Carga Horária:</strong>
+      <span id="totalCarga">0</span> <span id="unidadeHoras">horas</span></p>
+    </div>
+
+<!-- Lista de Colaboradores Elegíveis -->
+<style>
+  #listaColab {
+    display: block;
+    flex-direction: column;
+    position: relative;
+    height: 350px;
+    max-height: 800px; /* Altura máxima antes de ativar a rolagem */
+    width: 160%; /* Ocupa toda a largura disponível */
+    left: -25%;
+    top: -50px; 
+    overflow-y:scroll;
+  }
+
+  #listaColab li {
+    display: flex;
+    justify-content: center;
+    padding: 8px 12px;
+    background-color: #f9f9f9;
+    text-align: center;
+  }
+
+  
+#listaColab li:nth-child(even){
+    background-color: #f1f1f1;
+}
+.list-names {
+  list-style-type: none;
+}
+
+.list-names li {
+  margin: 5px 0;
+}
+
+#search {
+  width: 160%;
+  padding: 8px;
+  top: -70px;
+  left: -25%;
+  border-radius: 15px;
+  border: 1px groove rgb(214, 209, 209);
+
+}
+
+input[type="text"],
+input[type="number"] {
+  box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.1);
+}
+.icon {
+  position: absolute;
+  top: 17%;
+  left: 86px;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #888;
+  pointer-events: none;
+  z-index: 10;}
+
+
+</style>
+
+<div id="colab-eleg">
+  <h2 id="colaboradores">Colaboradores Elegíveis</h2>
+  <div id="list-names">
+    <i class="fa-solid fa-magnifying-glass icon"></i>
+    <input type="text" id="search"  placeholder="Pesquisar" autofocus>
+  </div>
+  <ul id="listaColab">
+    {% for colaborador in colaboradores %}
+      <li>{{ colaborador.nome }}</li>
+    {% empty %}
+      <li>Nenhum colaborador elegível encontrado.</li>
+    {% endfor %}
+  </ul>
+</div>
+
+
+</main>
+
+
+  <!--Modal de Aviso-->
+  <div id="modal-aviso" class="modal-aviso">
+    <div class="modal-conteudo">
+      <span class="fechar-aviso">&times;</span>
+      <p id="mensagemModal"></p>
+      <button id="btnFecharModal">Fechar</button>
+<!--Mudança-->
+      <div id="popup-tempo">
+      <p id="alerta" style="display: none;">Limite de 30h excedido! Exclua um curso ou entre em contato.</p>
+      </div>
+    </div>
+  </div>
+
+
+</body>
+
+<script>
+  //Menu lateral
+  function toggleMenu() {
+    document.getElementById("side-menu").classList.add("open");
+    document.querySelector(".overlay-ham").classList.add("active");
+  }
+
+  function closeMenu() {
+    document.getElementById("side-menu").classList.remove("open");
+    document.querySelector(".overlay-ham").classList.remove("active");
+  }
+
+  function closeSidebar() {
+    document.querySelector('.sidebar').style.display = 'none';
+  }
+
+  function logout() {
+    alert('Você saiu!');
+  }
+
+  const menuItems = document.querySelectorAll('.item-menu');
+
+  menuItems.forEach(item => {
+    item.addEventListener('click', () => {
+      menuItems.forEach(i => i.classList.remove('active')); // remove dos outros
+      item.classList.add('active'); // adiciona ao clicado
+    });
+  });
+  
+  //Processo de Cadastro de Cursos
+  document.addEventListener("DOMContentLoaded", () => {
+  const closeModalButton = document.querySelector("#continue-popup"); 
+  const modal = document.querySelector("#modal-selection");
+  const overlay = document.querySelector("#overlay");
+  const cursos = document.querySelector("#container");
+  const lista_adc = document.querySelector("#lista-container");
+  const logo_woman = document.querySelector("#logo_woman");
+  const logo_perfil = document.querySelector("#logo_perfil");
+  const balao_fala = document.querySelector("#balão_fala");
+  const lista = document.querySelector("#colab-eleg");
+  const horas = document.querySelector("#total-horas");
+    // Exibir popup automaticamente ao carregar a página
+    if (modal && overlay) {
+        modal.classList.remove("hide");
+        overlay.classList.remove("hide"); 
+    }
+  
+    if (closeModalButton) {
+      closeModalButton.addEventListener("click", () => {
+          if (modal){
+            modal.remove();
+          }
+          if (overlay){
+            overlay.classList.add("hide");
+          }
+          if (cursos){
+             cursos.style.display = "block";
+          }
+          if(lista_adc){
+            lista_adc.style.display = "block";
+          }
+          if (logo_woman) {
+              logo_woman.style.display = "none"; 
+          }
+  
+          if(lista){
+              lista.style.display = "block";
+          }
+          if(horas){
+              horas.style.display = "block";
+
+          modal.classList.add("hide");
+          overlay.classList.add("hide");
+          }
+      });
+    }
+  });
+  
+  let totalHoras = 0;
+  const NUMERO_LINHAS = 10; // Número fixo de linhas
+  
+  function inicializarListaCursos() {
+      let lista = document.getElementById("listaCursos");
+      lista.innerHTML = ""; // Limpa a lista existente
+  
+      for (let i = 0; i < NUMERO_LINHAS; i++) {
+          let divCurso = document.createElement("div");
+          divCurso.classList.add("curso-item", "curso-item-oculto");
+          divCurso.dataset.index = i; // Adiciona um índice para rastrear a linha
+  
+          let labelCurso = document.createElement("label");
+          labelCurso.classList.add("curso-label");
+  
+          let checkbox = document.createElement("input");
+          checkbox.type = "checkbox";
+          checkbox.onchange = function() { tacharCurso(this); };
+  
+          let textoCurso = document.createTextNode(""); // Inicialmente vazio
+  
+          labelCurso.appendChild(checkbox);
+          labelCurso.appendChild(textoCurso);
+  
+          divCurso.appendChild(labelCurso);
+          lista.appendChild(divCurso);
+      }
+  }
+  
+  
+// Exemplo: chamar essa função sempre que o valor for atualizado
+document.addEventListener("DOMContentLoaded", atualizarTextoCarga);
+
+let cursosAdicionados = []; // Array para rastrear os cursos adicionados
+function adicionarCurso() {
+    let nomeCurso = document.getElementById("curso").value.toUpperCase();
+    let cargaHoraria = parseInt(document.getElementById("carga").value);
+
+    if (nomeCurso && cargaHoraria > 0) {
+
+        let cursoJaExiste = cursosAdicionados.some(curso => curso.nome === nomeCurso);
+
+        if (cursoJaExiste) {
+            exibirModalAviso("Este curso já foi adicionado");
+            return;
+        }
+
+        if (cursosAdicionados.length < NUMERO_LINHAS) {
+            totalHoras += cargaHoraria;
+            let lista = document.getElementById("listaCursos");
+
+            let divCurso = document.createElement("div");
+            divCurso.classList.add("curso-item");
+            divCurso.dataset.index = cursosAdicionados.length;
+
+            let labelCurso = document.createElement("label");
+            labelCurso.classList.add("curso-label");
+
+            let checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.classList.add("curso-checkbox");
+            checkbox.style.display = "inline-block";
+            checkbox.onchange = function () { tacharCurso(this); };
+
+            let textoCurso = document.createTextNode(` ${nomeCurso} - ${cargaHoraria}h`);
+
+            labelCurso.appendChild(checkbox);
+            labelCurso.appendChild(textoCurso);
+            divCurso.appendChild(labelCurso);
+
+            lista.appendChild(divCurso);
+
+            cursosAdicionados.push({
+                index: cursosAdicionados.length,
+                nome: nomeCurso,
+                horas: cargaHoraria,
+                tachado: false
+            });
+
+            document.getElementById("totalCarga").innerText = totalHoras;
+            verificarLimite();
+            document.getElementById("curso").value = "";
+            document.getElementById("carga").value = "";
+            // Atualiza os inputs hidden 
+            atualizarInputsHidden();
+        } else {
+            exibirModalAviso("Limite de cursos atingido.");
+        }
+    }
+}
+
+
+function atualizarInputsHidden() {
+    const form = document.getElementById("setar_banco_livre");
+
+    // Remove todos os antigos inputs hidden
+    form.querySelectorAll('input[type="hidden"][name="cursos[]"], input[type="hidden"][name="cargas[]"]').forEach(el => el.remove());
+
+    // Recria com base nos cursos válidos
+    cursosAdicionados.forEach(curso => {
+        if (!curso.tachado) {
+            let inputNome = document.createElement("input");
+            inputNome.type = "hidden";
+            inputNome.name = "cursos[]";
+            inputNome.value = curso.nome;
+
+            let inputCarga = document.createElement("input");
+            inputCarga.type = "hidden";
+            inputCarga.name = "cargas[]";
+            inputCarga.value = curso.horas;
+
+            form.appendChild(inputNome);
+            form.appendChild(inputCarga);
+        }
+    });
+}
+
+
+
+function toggleDropdown(event) {
+  event.stopPropagation();
+  const menu = document.querySelector('.dropdown-menu');
+  menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const options = document.querySelectorAll('.option-pa');
+  const display = document.getElementById('pa-nome-selecionado');
+  const menu = document.querySelector('.dropdown-menu');
+
+  options.forEach(option => {
+    option.addEventListener('click', function (e) {
+      e.preventDefault(); // Evita redirecionamento
+
+      // Remove classe de todos
+      options.forEach(opt => opt.classList.remove('selecionado'));
+
+      // Marca como selecionado
+      this.classList.add('selecionado');
+
+      // Mostra o nome selecionado na tela
+      display.textContent = this.textContent;
+
+      // Fecha o menu
+      menu.style.display = 'none';
+    });
+  });
+
+  // Fecha o dropdown ao clicar fora
+  document.addEventListener('click', () => {
+    menu.style.display = 'none';
+  });
+});
+
+
+
+
+
+
+
+// Fecha o menu se clicar fora
+document.addEventListener("click", function(event) {
+  const dropdown = document.querySelector("#dropdown");
+  if (!dropdown.contains(event.target)) {
+    const menu = dropdown.querySelector(".dropdown-menu");
+    menu.classList.remove("show");
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  function encontrarLinhaVazia() {
+      let lista = document.getElementById("listaCursos");
+      let linhas = lista.querySelectorAll(".curso-item");
+      for (let linha of linhas) {
+          if (linha.querySelector(".curso-label").childNodes[1].textContent === "") {
+              return linha;
+          }
+      }
+      return null;
+  }
+  
+  
+  
+  function tacharCurso(checkbox) {
+      let label = checkbox.parentElement;
+      let linha = label.parentElement;
+      let index = parseInt(linha.dataset.index);
+  
+      let curso = cursosAdicionados.find(c => c.index === index);
+      if (curso) {
+          curso.tachado = checkbox.checked;
+          if (checkbox.checked) {
+              label.style.textDecoration = "line-through";
+          } else {
+              label.style.textDecoration = "none";
+          }
+      }
+  }
+  
+  function removerCursosTachados() {
+      let cursosParaRemover = cursosAdicionados.filter(c => c.tachado);
+  
+  
+  //Bloco adicionado
+      if (cursosParaRemover.length === 0){
+          exibirModalAviso("Por favor, selecione pelo menos um curso para remover.");
+          return;
+      }
+  
+      cursosParaRemover.forEach(curso => {
+          let linha = document.querySelector(`.curso-item[data-index="${curso.index}"]`);
+          if (linha) {
+              linha.remove(); 
+          }
+      });
+  
+      // Mantém apenas os cursos que não foram tachados
+      cursosAdicionados = cursosAdicionados.filter(c => !c.tachado);
+  
+      // Recalcula a carga horária
+      totalHoras = cursosAdicionados.reduce((sum, c) => sum + c.horas, 0);
+      document.getElementById("totalCarga").innerText = totalHoras;
+  
+      verificarLimite();
+  }
+  
+  function atualizarTextoCarga (){
+  
+  let totalCarga = document.getElementById("totalCarga")
+  let unidadeHoras = document.getElementById ("unidadeHoras");
+  
+  let valor = parseInt(totalCarga.textContent,10);
+  
+  if(!isNaN(valor)){
+      unidadeHoras.textContent = (valor === 1) ? " hora": " horas";
+  }else{
+      console.error("Valor inválido em #totalCarga");
+  }
+  }
+  
+  function verificarLimite() {
+      let botao = document.getElementById("btnConfirmar");
+      let alerta = document.getElementById("alerta");
+      let modalAviso = document.getElementById("modal-aviso");//
+      let overlay = document.getElementById("overlay");//
+      
+      if (totalHoras > 30) {
+          exibirModalAviso("Limite de 30h excedido! Exclua um curso ou entre em contato.");
+
+      } else {
+          botao.classList.remove("disabled");
+          botao.disabled = false;
+          alerta.style.display = "none";
+          if (modalAviso && overlay){
+              overlay.classList.add("hide");
+              modalAviso.style.display = "none";
+          }
+      }
+  }
+
+  function confirmarCriacao() {
+    const overlay = document.getElementById("overlay");
+    document.getElementById("popup").style.display = "block";
+    document.getElementById("btnConfirmarSecond").disabled = false;
+    document.getElementById("btnConfirmarSecond").classList.remove("disabled");
+    overlay.classList.remove("hide");
+}
+  
+  function fecharPopup() {
+      document.getElementById("popup").style.display = "none";
+      overlay.classList.add("hide");
+   
+  }
+  
+  document.getElementById("btnConfirmarSecond").addEventListener("click", function (e) {
+    e.preventDefault(); // evita o submit automático
+    atualizarInputsHidden(); // garante que só os inputs certos vão
+    document.getElementById("setar_banco_livre").submit(); // agora envia só uma vez
+});
+
+  // Modal de aviso
+  const modalAviso = document.getElementById("modal-aviso");
+  const mensagemModal = document.getElementById("mensagemModal");
+  const btnFecharModal = document.getElementById("btnFecharModal");
+  const fecharModalSpan = document.querySelector("#modal-aviso .fechar-aviso");
+  
+  function exibirModalAviso(mensagem) {
+    mensagemModal.textContent = mensagem;
+    modalAviso.style.display = "flex";
+  }
+  
+  function fecharModalAviso() {
+    modalAviso.style.display = "none";
+  }
+  
+  btnFecharModal.onclick = fecharModalAviso;
+  fecharModalSpan.onclick = fecharModalAviso;
+  
+  window.onclick = function(event) {
+    if (event.target == modalAviso) {
+      fecharModalAviso();
+    }
+  };
+  
+  
+  function fecharModalAviso() {
+    modalAviso.style.display = "none"
+  }
+  
+  btnFecharModal.onclick = fecharModalAviso;
+  fecharModalSpan.onclick = fecharModalAviso;
+  
+  window.onclick = function(event) {
+      if (event.target == modalAviso) {
+          fecharModalAviso();
+      }
+  };
+  
+// Finaliza Cadastro de Cursos
+function finalizarCadastro() {
+  exibirModalAviso("Parabéns, líder! Os Cursos foram cadastrados com sucesso! Em breve você poderá acompanhá-los no Plano de Aprendizagem de sua equipe!");
+  document.getElementById("popup").style.display = "none";
+  exibirListaCursos();
+}
+
+ 
+  //Pesquisa dos Colaboradores
+  const searchInput = document.getElementById("search");
+        const listItems = document.querySelectorAll("#lista li");
+
+        searchInput.addEventListener("input", function() {
+          const searchTerm = this.value.toLowerCase();
+
+          listItems.forEach(item => {
+            const text = item.textContent.toLowerCase();
+            item.style.display = text.includes(searchTerm) ? "" : "none";
+          });
+        });
+
+
+const nomeGestor = "{{ nome_gestor|escapejs }}";
+const saudacaoElemento = document.querySelector(".saudacao");
+
+function atualizarMensagem() {
+  const agora = new Date();
+  const diaSemana = agora.toLocaleDateString("pt-BR", { weekday: "long" });
+  const dia = agora.getDate();
+  const mes = agora.toLocaleDateString("pt-BR", { month: "long" });
+  const ano = agora.getFullYear();
+  const hora = agora.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+
+  let saudacaoTexto;
+  const horaAtual = agora.getHours();
+
+  if (horaAtual >= 6 && horaAtual < 12) {
+    saudacaoTexto = `Bom dia, ${nomeGestor}!`;
+  } else if (horaAtual >= 12 && horaAtual < 18) {
+    saudacaoTexto = `Boa tarde, ${nomeGestor}!`;
+  } else {
+    saudacaoTexto = `Boa noite, ${nomeGestor}!`;
+  }
+
+    // Atualiza cada parte separadamente
+    saudacaoElemento.innerHTML = `<div style="font-size:1.5em;"> <strong>${saudacaoTexto}</strong></div>Hoje é ${diaSemana}, ${dia} de ${mes} de ${ano}, agora são ${hora}.`;
+  }
+
+  atualizarMensagem();
+  setInterval(atualizarMensagem, 1000);
+    </script>
+
+
+    <!--Footer-->
+    <footer id="footer">
+      <img  class="logo_mv" src="{% static 'back_log/css/images/MV_01.png' %}" alt="logo_mv" width="15px">
+      <div class="footer-text">
+      <p>Copyright 2025 - Todos os direitos reservados.</p>
+      <p>Desenvolvido por Universidade MV.</p>
+      </div>
+  
+</html>

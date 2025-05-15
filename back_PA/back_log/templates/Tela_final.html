@@ -1,0 +1,359 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'back_log/css/final.css' %}">
+    <link rel="stylesheet" href="{% static 'back_log/css/large-desktop.css' %}">   
+    <link rel="stylesheet" href="{% static 'back_log/css/global.css' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://universidademv.com.br/action/favicon.png?c=60">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+   <title>PA 2025</title>
+   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    </style>
+</head>
+
+<body>
+
+
+  <style>
+    body {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0,0,0,0.8)), url("{% static 'back_log/css/images/PERFIL_CURSOS.png' %}");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-size: cover;
+    font-family: Poppins;
+    z-index: 1;
+  }
+  </style>
+
+    <!--Cabeçalho: Nome do Gestor e da Diretoria-->
+    <header id="profile">
+      <div id="profile-container">
+        <img src="{% static 'back_log/css/images/Usuário.png' %}" alt="ICONE_GESTOR" class="logo_icon" />
+
+        <div class="text-logo">
+          <p class="nome_gestor"><label for="nome_gestor">{{ gestor.name_gestor }}</label></p>
+          <p class="nome_diretoria"><label for="diretoria_gestor">Diretoria Corporativa {{ gestor.id_diretoria.name_diretoria }}</label></p>
+          <div id="pa-nome-selecionado" class="campo-nome-pa">Nome do PA selecionado</div>
+        
+        </div><!--Fim da text-logo-->   
+      </div><!--Fim da div#profile-container-->
+
+      <div class="menu-container">
+        <button class="menu-ham" onclick="toggleMenu()">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      
+        <div class="overlay-ham" onclick="closeMenu()">
+        </div>
+      
+        <nav id="side-menu">
+          <button id="close-menu" onclick="closeMenu()"><i class="fa-solid fa-xmark"></i></button>
+          <a href="#" class="item-menu"><i class="fa-solid fa-house"></i><span>Início</span></a>
+          <a href="#" class="item-menu"><i class="fa-solid fa-circle-info"></i><span>Informações</span></a>
+          <a href="#" class="item-menu"><i class="fa-solid fa-book-open"></i><span title="Plano de Aprendizagem">PA</span></a>
+          <a href="#" class="item-menu"><i class="fa-solid fa-user"></i><span title="Plano de Desenvolvimento Individual">PDI</span></a>
+          <a href="#" class="item-menu"><i class="fa-solid fa-list-check"></i><span title="Mapa de Competências">MCP</span></a>
+          <a href="#" class="item-menu"><i class="fa-solid fa-envelope"></i><span>Contato</span></a>
+       
+          <div class="logout">
+            <button onclick="logout()"><span>Logout</span>
+            <i class="fa-solid fa-right-from-bracket"></i>
+          </button>
+          </div>
+       
+        </nav>
+    </header>
+
+<main>
+
+   <!--Saudação //-->
+   <div id="saudacao-wrapper">
+     <div id="saudacao" class="saudacao"></div>
+   </div>
+
+   <!--Titúlo e nome do PA //-->
+   <div class="course-list">
+    <img class="title_area" src="{% static 'back_log/css/images/CATEGORIA BIBLIOTECA (3).png' %}">
+    <h2 class="pa-area"></h2>
+  </div>
+
+  <!-- Lista de Cursos -->
+  <div id="lista-container">
+
+    <div id="dropdown" class="dropdown">
+      <button class="botao-pa" onclick="toggleDropdown(event)" title="Selecione o PA">
+        <i class="fa-solid fa-book-open"></i>
+      </button>
+      <div class="dropdown-menu">
+        <a href="#" class="option-pa">Opção 1</a>
+        <a href="#" class="option-pa">Opção 2</a>
+      </div>
+
+    </div><!--Fim da div#dropdown-->
+  </div>
+ 
+  <h2>{{ pa.nome }}</h2>
+  <div id="listaCursos"
+>
+ {% for curso in cursos %}
+   <p class="curso-item" >
+     {{ curso.nome }} - {{ curso.duracao_horas }}h
+   </p>
+ {% empty %}
+   <p>Não há cursos cadastrados.</p>
+ {% endfor %}
+</div>
+
+  <p id="total-horas">
+  <b>Carga Horária Total:</b> {{ total_horas }} horas
+  </p>
+</div>
+
+  <div id="botoes-container">
+    <button id="btnEditar" style=" align-self: center;">Editar</button>
+  </div>
+
+
+    <!--Rodapé-->
+    <footer id="footer">
+      <img  class="logo_mv" src="{% static 'back_log/css/images/MV_01.png' %}" alt="logo_mv" width="15px">
+      <div class="footer-text">
+        <p>Copyright 2025 - Todos os direitos reservados.</p>
+        <p>Desenvolvido por Universidade MV.</p>
+      </div>
+    </footer>
+  </main>
+</body>
+
+<script>
+
+function toggleMenu() {
+    document.getElementById("side-menu").classList.add("open");
+    document.querySelector(".overlay-ham").classList.add("active");
+  }
+
+  function closeMenu() {
+    document.getElementById("side-menu").classList.remove("open");
+    document.querySelector(".overlay-ham").classList.remove("active");
+  }
+
+  function closeSidebar() {
+    document.querySelector('.sidebar').style.display = 'none';
+  }
+
+  function logout() {
+    alert('Você saiu!');
+  }
+
+  const menuItems = document.querySelectorAll('.item-menu');
+
+  menuItems.forEach(item => {
+    item.addEventListener('click', () => {
+      menuItems.forEach(i => i.classList.remove('active')); // remove dos outros
+      item.classList.add('active'); // adiciona ao clicado
+    });
+  });
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const closeModalButton = document.querySelector("#continue-popup"); 
+  const modal = document.querySelector("#modal-selection");
+  const overlay = document.querySelector("#overlay");
+  const cursos = document.querySelector("#container");
+  const lista_adc = document.querySelector("#lista-container");
+  const logo_woman = document.querySelector("#logo_woman");
+  const logo_perfil = document.querySelector("#logo_perfil");
+  const balao_fala = document.querySelector("#balão_fala");
+  const lista = document.querySelector("#colab-eleg");
+  const horas = document.querySelector("#total-horas");
+    // Exibir popup automaticamente ao carregar a página
+    if (modal && overlay) {
+        modal.classList.remove("hide");
+        overlay.classList.remove("hide"); 
+    }
+  
+    if (closeModalButton) {
+      closeModalButton.addEventListener("click", () => {
+          if (modal){
+            modal.remove();
+          }
+          if (overlay){
+            overlay.classList.add("hide");
+          }
+          if (cursos){
+             cursos.style.display = "block";
+          }
+          if(lista_adc){
+            lista_adc.style.display = "block";
+          }
+          if (logo_woman) {
+              logo_woman.style.display = "none"; 
+          }
+          if(logo_perfil){
+              logo_perfil.style.display="block";
+          }
+          if(balao_fala){
+              balao_fala.style.display="block";
+          }
+          if(lista){
+              lista.style.display = "block";
+          }
+          if(horas){
+              horas.style.display = "block";
+
+          modal.classList.add("hide");
+          overlay.classList.add("hide");
+          }
+      });
+    }
+  });
+  
+  
+
+let listaHabilitada = true;
+
+    
+// Exibe o botão "Editar"
+let botaoEditar = document.getElementById("btnEditar");
+if (botaoEditar) {
+botaoEditar.style.display = "flex";
+botaoEditar.style.position =  "fixed";
+botaoEditar.style.top = "100px";
+botaoEditar.style.left = "170%";
+ 
+    }
+/*
+let totalHoras = document.getElementById("total-horas");
+if(totalHoras){
+    totalHoras.style.position = "absolute";
+    totalHoras.style.top = "75%";
+    totalHoras.style.left = "44%";
+    totalHoras.style.transform = "translateX(-17%)";
+    totalHoras.style.bottom = "5px";
+    totalHoras.style.color = "#8a8888";
+    totalHoras.style.fontWeight=500;
+}*/
+
+    let cursos = listaCursos.querySelectorAll(".curso-item");
+    cursos.forEach(curso => {
+        let checkbox = curso.querySelector("input[type='checkbox']");
+        let botaoExcluir = curso.querySelector(".botao-excluir");
+    
+        if (checkbox) {
+            checkbox.disabled = true; // Desabilita o checkbox
+            checkbox.style.display = "none"; // Oculta o checkbox
+        }
+        if (botaoExcluir) {
+            botaoExcluir.style.display = "none"; // Oculta o botão de exclusão
+        }
+    });
+    
+
+
+
+
+function voltarParaTelaInicial() {
+    // Exibe os elementos ocultos anteriormente
+    let elementosParaExibir = document.querySelectorAll("#container, #balão_fala, #logo_perfil");
+    elementosParaExibir.forEach(elemento => {
+        if (elemento) {
+            elemento.style.display = "block";
+        }
+    });
+
+    let modal = document.getElementById("modal-selection");
+    if (modal) {
+        modal.style.display = "block";
+    }
+
+    let overlay = document.getElementById("overlay");
+    if (overlay) {
+        overlay.style.display = "block";
+    }
+
+    let listaCursos = document.getElementById("listaCursos");
+    if (listaCursos) {
+        let cursos = listaCursos.querySelectorAll(".curso-item");
+        cursos.forEach(curso => curso.classList.remove("curso-desabilitado"));
+    }
+}
+
+function toggleDropdown(event) {
+  event.stopPropagation();
+  const menu = document.querySelector('.dropdown-menu');
+  menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const options = document.querySelectorAll('.option-pa');
+  const display = document.getElementById('pa-nome-selecionado');
+  const menu = document.querySelector('.dropdown-menu');
+
+  options.forEach(option => {
+    option.addEventListener('click', function (e) {
+      e.preventDefault(); // Evita redirecionamento
+
+      // Remove classe de todos
+      options.forEach(opt => opt.classList.remove('selecionado'));
+
+      // Marca como selecionado
+      this.classList.add('selecionado');
+
+      // Mostra o nome selecionado na tela
+      display.textContent = this.textContent;
+
+      // Fecha o menu
+      menu.style.display = 'none';
+    });
+  });
+
+  // Fecha o dropdown ao clicar fora
+  document.addEventListener('click', () => {
+    menu.style.display = 'none';
+  });
+});
+
+
+     
+
+const nomeGestor = "{{ nome_gestor|escapejs }}";
+const saudacaoElemento = document.querySelector(".saudacao");
+
+function atualizarMensagem() {
+  const agora = new Date();
+  const diaSemana = agora.toLocaleDateString("pt-BR", { weekday: "long" });
+  const dia = agora.getDate();
+  const mes = agora.toLocaleDateString("pt-BR", { month: "long" });
+  const ano = agora.getFullYear();
+  const hora = agora.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+
+  let saudacaoTexto;
+  const horaAtual = agora.getHours();
+
+  if (horaAtual >= 6 && horaAtual < 12) {
+    saudacaoTexto = `Bom dia, ${nomeGestor}!`;
+  } else if (horaAtual >= 12 && horaAtual < 18) {
+    saudacaoTexto = `Boa tarde, ${nomeGestor}!`;
+  } else {
+    saudacaoTexto = `Boa noite, ${nomeGestor}!`;
+  }
+
+    // Atualiza cada parte separadamente
+    saudacaoElemento.innerHTML = `<div style="font-size:1.5em;"> <strong>${saudacaoTexto}</strong></div>Hoje é ${diaSemana}, ${dia} de ${mes} de ${ano}, agora são ${hora}.`;
+  }
+
+  atualizarMensagem();
+  setInterval(atualizarMensagem, 1000);
+
+</script>
+
+    
+  
+</html>

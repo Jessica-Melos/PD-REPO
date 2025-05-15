@@ -1,0 +1,237 @@
+/*RESET*/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+
+body{
+max-width: 100%;
+background-image: url("/BACKGROUND.png");
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+background-attachment: fixed;
+}
+
+/*Alterações para responsividade*/
+
+/*LOGO PA*/
+.pa_container{
+    display: flex;
+    justify-content: right;
+    margin-right: 10px;
+    margin-top: 744px;
+}
+    
+.pa_container img{
+    max-width: 100%;
+    width: 120px;
+    height: 120px;
+    }
+/* Estilo geral do cabeçalho */
+.cabeçalho_gestor {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    /* Ajuste conforme a paleta de cores */
+}
+
+/* Estilo do ícone de gestor*/
+.logo_container {
+    margin-right: 15px; /* Espaço entre o ícone e o texto */
+}
+
+.logo_icon {
+    width: 50px; /* Ajuste o tamanho conforme necessário */
+    height: auto;
+    margin-left: 40px;
+    margin-right: -35px;
+    margin-top: 26px;
+}
+
+/* Estilo do texto */
+.texto_gestor {
+    display: flex;
+    flex-direction: column;
+}
+
+.gestor_container, 
+.diretoria_container {
+    margin: 1px 0;
+}
+
+/*nome Gestor*/
+.gestor_container label{
+    position:fixed;
+    text-align: left;
+    padding: 20px;
+    color:rgb(97, 97, 97);
+    margin-top: 10px;
+    margin-left: 90px;
+    top: 0;
+    font-size: 20px;
+    font-weight: bold;
+    font-style: italic;
+}
+    
+
+.diretoria_container label{
+    position:fixed;
+    text-align: left;
+    padding: 20px;
+    color:rgb(97, 97, 97);
+    margin-top: 35px;
+    margin-left: 90px;
+    top: 0;
+    font-size: 15px;
+}
+
+/* Estilização da Popup */
+.criacao_popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    box-shadow: #575555;
+}
+
+.criacao_popup.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+.popup-content {
+    background-color: #fff;
+    padding: 150px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 90%;
+    width: 750px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.popup-content h2 {
+    margin-bottom: 4px;
+}
+
+.popup-content p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 30px;
+    color: #da5461;
+    font-weight: bolder;
+
+}
+
+
+/*Botões de criação (Diretoria, Área e Subárea)*/
+
+.diretoria-popup{
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: #616161;
+    color: #f3f3f3;
+    border: none;
+    border-radius: 17px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    width: 100%;
+}
+
+.diretoria-popup:hover {
+    background-color: #cac9c9;
+    color: rgb(0, 0, 0);
+}
+
+.diretoria-popup {
+    background-color: #787878;
+}
+
+
+.area-popup{
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: #616162;
+    color: #f3f3f3;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    width: 100%;
+
+}
+
+.area-popup:hover {
+    background-color: #cac9c9;
+    color: rgb(0, 0, 0);
+}
+
+.area-popup {
+    background-color: #787878;
+}
+
+.subarea-popup{
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: #616161;
+    color: #f3f3f3;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    width: 100%;
+    margin-bottom: 30px;
+
+}
+
+.subarea-popup:hover {
+    background-color: #cac9c9;
+    color: rgb(0, 0, 0);
+}
+
+.subarea-popup {
+    background-color: #787878;
+}
+
+
+/* Botões popup*/
+.criar-popup,
+.cancelar-popup {
+    padding: 12px 26px;
+    margin: 1px;
+    background-color: #e0e0e0;
+    color: #575555;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.criar-popup:hover {
+    background-color: #008977;
+    color: white;
+}
+
+.criar-popup {
+    background-color: #e0e0e0;
+}
+
+.cancelar-popup:hover {
+    background-color: #da5461;
+    color: white;
+}

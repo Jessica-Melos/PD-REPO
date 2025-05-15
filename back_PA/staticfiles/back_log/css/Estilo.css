@@ -1,0 +1,361 @@
+/*Login*/
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4); /* fundo escuro transparente */
+    z-index: 0;
+  }
+
+#img-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 20;   
+}
+/*Cabeçalho*/
+
+  /*LOGIN e CADASTRO*/
+#container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 45vh;
+    z-index: 1;
+}
+
+.content{
+    border-radius: 15px;
+    background-color: white;
+    width: 960px;
+    height: 55%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    box-shadow: 0px 4px 15px rgba(94, 93, 93, 0.5);
+}
+
+.content::before{
+    content:"";
+    background: linear-gradient(135deg, #163852, #0a8b77); /* Degradê */
+    width: 40%;
+    height: 100%;
+    position: absolute;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    left: 0;
+    box-shadow: 4px 4px 10px rgba(94, 93, 93, 0.5);
+}
+
+
+
+/*Primeiro Conteúdo*/
+.first-content{
+display: flex;
+}
+
+.first-content .second-column{
+    z-index: 11;
+}
+
+.title-primary{
+    color: #fff;
+    font-weight: bold;
+}
+
+.title-second{
+    color: #0a8b77;
+   text-align: center;
+}
+.first-column{
+    text-align: center;
+    z-index: 10;
+    width: 40%;
+}
+
+.second-column{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+
+}
+.description-primary{
+    font-size: 14px;
+    text-align: center;
+    color: #fff;
+    line-height: 1px;
+    margin-top: 1rem;
+}
+
+.description-second{
+    font-size: 12px;
+    text-align: center;
+    color: #d1cece;
+    line-height: 20px;
+    margin-top: 7px;
+}
+.btn{
+    border-radius: 15px;
+    border: 1px solid;
+    text-transform: uppercase;
+    color: #fff;
+    padding: 10px 50px;
+    cursor: pointer;
+    width: 190px;
+    align-self: center;
+    margin-top: 1rem;
+}
+
+.btn-primary{
+    background-color: transparent;
+    font-size: 10px;
+    border-color: #fff;
+    transition: background-color 0.5s;
+}
+
+.btn-primary:hover{
+background-color: #fff;
+color: #0a8b77;
+}
+
+.btn-second{
+    font-size: 10px;
+    background-color: #0a8b77;
+    color: #fff;
+    border-color: #0a8b77;
+    transition: background-color 0.5s;
+}
+
+.btn-second:hover{
+    background-color: #fff;
+    color: #0a8b77;
+}
+
+#form_cad {
+    display: flex;
+    flex-direction: column;
+    width: 55%;
+}
+
+#form_cad input{
+    height: 45px;
+    border: none;
+    background-color: #f8f7f7;
+    margin: 8px;
+    border-radius: 10px;
+}
+
+
+/*Segundo Conteúdo*/
+.second-content{
+    position: absolute;
+    display: flex;
+}
+
+.second-content .first-column{
+    order: 2;
+    z-index: -1;
+}
+
+.second-content .second-column{
+    order: 1;
+    z-index: -1;
+}
+
+#form_log {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}
+
+#form_log input{
+    height: 45px;
+    border: none;
+    background-color: #f8f7f7;
+    margin: 8px;
+    border-radius: 10px;
+}
+
+/*login*/
+.login-js .first-content .first-column,
+.login-js .first-content .second-column{
+    z-index: -1;
+}
+
+.login-js .second-content .first-column{
+    z-index:13;
+}
+
+
+.login-js .second-content .second-column{
+    z-index: 11;
+}
+
+
+/*Deslocamento conteúdo atrás do content::before*/
+.login-js .first-content .second-column{
+    z-index: -1;
+    position: relative;
+    animation: deslocamentoEsq 3s;
+}
+
+.cadastre-js .second-content .second-column{
+    position: relative;
+    z-index: -1;
+    animation: deslocamentoDir 1.3s;
+}
+
+.login-js .content::before{
+    left:60%;
+    border-top-left-radius:0;
+    border-bottom-left-radius:0;
+    border-top-right-radius:15px;
+    border-bottom-right-radius: 15px;
+    animation: slidein 1.3s;
+    z-index: 12;
+}
+
+/*Cadastro*/
+.cadastre-js .content::before{
+    animation: slideout 1.3s;
+    z-index: 12;
+}
+.cadastre-js .second-content .first-column,
+.cadastre-js .second-content .second-column{
+    z-index: -1;
+}
+
+.cadastre-js .first-content .first-column{
+    z-index: 13;
+}
+.cadastre-js .first-content .second-column{
+    z-index: 11;
+}
+
+/*Animação*/
+
+@keyframes deslocamentoEsq{
+    from{
+        left:0;
+        opacity: 1;
+        z-index: 12;
+    }
+
+    25%{
+        left: -80px;
+        opacity: .5;
+    }
+
+    50%{
+        left: -100px;
+        opacity: .2;
+    }
+    to{
+        left: -110px;
+        opacity: 0;
+        z-index: -1;
+    }
+    
+}
+
+@keyframes deslocamentoDir{
+    from{
+        left:0;
+        z-index: 12;
+    }
+
+    25%{
+        left: 80px;
+    }
+
+    50%{
+        left: 100px;
+    }
+    to{
+        left: 110px;
+        z-index: -1;
+    }
+    
+}
+
+
+@keyframes slidein {
+    from {
+        left: 0;
+        width: 40%;
+    }
+    25% {
+        left: 5%;
+        width: 50%;
+    }
+
+    50% {
+        left:25%;
+        width:60%;
+    }
+
+    75% {
+        left:45%;
+        width: 50%;
+    }
+    to{
+        left:60%;
+        width: 40%;
+    }
+}
+
+
+@keyframes slideout {
+    from {
+        left: 60%;
+        width: 40%;
+    }
+    25% {
+        left: 45%;
+        width: 50%;
+    }
+
+    50% {
+        left:25%;
+        width:60%;
+    }
+
+    75% {
+        left:5%;
+        width: 50%;
+    }
+    to{
+        left:0;
+        width: 40%;
+    }
+
+}
+
+/*Footer*/
+#footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 9px;
+    display: flex;
+    font-size: 8px;
+    font-family: Poppins;
+    color: rgb(184, 185, 184);
+    line-height: 10px;
+    justify-content: center;
+    gap: 8px;
+    opacity: 0.4;
+    z-index: 1;
+}
+
+.footer-text {
+    display: flex;
+    flex-direction: column;
+}

@@ -1,0 +1,76 @@
+def change_password(request):
+    if request.method == 'POST':
+        email = request.POST.get('email') 
+        new_password = request.POST.get('new_password')  
+
+        try:
+            gestor = Gestor.objects.get(email_gest=email)  # Busca o usuário pelo email
+            
+            if len(new_password) == 4 and new_password.isdigit():
+                gestor.identificador = new_password  # Atualiza a senha (coluna identificador)
+                gestor.changed_password = True  # Marca como senha trocada
+                gestor.save()
+
+                update_session_auth_hash(request, gestor)  # Atualiza a sessão do usuário
+                messages.success(request, 'Senha alterada com sucesso! Faça login novamente.')
+                return redirect('pagina')  # Redireciona para o login
+            else:
+                messages.error(request, 'A senha deve conter exatamente 4 dígitos.')
+        except Gestor.DoesNotExist:
+            messages.error(request, 'Usuário não encontrado.')
+    
+    # Retorna a página de troca de senha se algo falhar
+    return render(request, 'index', {'show_popup': True})
+
+
+
+c
+    <form method="POST" action="{% url 'change_password' %}"> 
+        {% csrf_token %} 
+        <div id="change_password">
+            <div id="modal-body">
+                <p class="description_password">Altere sua senha para prosseguir</p>
+                <label for="email">Informe o seu E-mail</label>
+                <input id="email" name="email" value="{{ email }}" readonly />
+
+                <label for="new-password">Informe a nova senha</label>
+                <input id="new-password" name="new_password" maxlength="4" pattern="\d{4}" required placeholder="****" />
+                <button type="submit">Alterar Senha</button>   
+            </div>
+        </div>
+    </form>
+
+
+        <script id="show-popup-data" type="application/json">
+            {{ show_popup|json_script:"showPopup" }}
+        </script>
+        
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Seletores para botões e elementos do DOM
+    const overlay = document.querySelector("#overlay");
+    const changePasswordPopup = document.querySelector("#change_password");
+
+    // Obtém o valor de showPopup do script JSON
+    const showPopup = JSON.parse(document.getElementById("show-popup-data").textContent);
+
+    // Verifica se a popup deve ser exibida
+    if (showPopup) {
+        overlay.classList.remove("hide");
+        changePasswordPopup.style.display = "block";
+    }
+
+    // Função para fechar a popup
+    const closePopup = () => {
+        overlay.classList.add("hide");
+        changePasswordPopup.style.display = "none";
+    };
+
+    // Opcional: Fecha a popup ao clicar no overlay
+    if (overlay) {
+        overlay.addEventListener("click", closePopup);
+    }
+}); // <-- Aqui termina o bloco do `DOMContentLoaded`, ponto e vírgula correto
+
+
+

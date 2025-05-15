@@ -1,0 +1,149 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'back_log/css/estilo.css' %}">
+    <link rel="stylesheet" href="{% static 'back_log/css/large-desktop.css' %}">
+    <link rel="stylesheet" href="{% static 'back_log/css/global.css' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://universidademv.com.br/action/favicon.png?c=60">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        </style>
+    
+    
+    <title>PA 2025 - Login</title>
+<!--Cabeçalho-->
+</head>
+
+<style>
+/*RESET*/
+
+body {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0,0,0,0.8)), url("{% static 'back_log/css/images/PERFIL_CURSOS.png'%}");
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin:0;
+    font-family: Poppins;
+}
+
+
+
+</style>
+
+<body>
+
+
+    <header>
+        <div id="img-container">
+            <img src="{% static 'back_log/css/images/PD-2025.png' %}" alt="LOGO_PA2025" width="250px">
+        </div>
+    </header>
+
+    <div id="overlay"></div>
+    <div id="container">    
+        <!-- Primeiro Conteúdo -->
+        <div class="content first-content">
+            <div class="first-column">
+                <h2 class="title title-primary">Bem-vindo(a)!</h2>
+                <p class="description description-primary">Acesse sua conta para acompanhar o PA de sua equipe.</p>
+                <button id="login" class="btn btn-primary">Login</button>
+            </div> <!-- Fim da div.first-column -->
+
+            <div class="second-column">
+                <h2 class="title title-second">Cadastre-se</h2>
+                <p class="description description-second">O identificador deve conter os <strong>dois primeiros</strong> e os <strong>dois últimos dígitos</strong> do seu CPF.</p>
+                <p class="description description-second"></p>
+                <form id="form_cad" method="POST" action="{% url 'form_cadastro' %}">
+                    {% csrf_token %}
+                    <input type="text" name="name_gest" placeholder="     Nome Completo" required>
+                    <input type="email" name="email" placeholder="     Email" required>
+                    <input type="password" name="identificador" placeholder="     Identificador" maxlength="4" required>
+                    <input type="text" name="diretoria" placeholder="     Diretoria">
+                    
+                    <button class="btn btn-second">Cadastrar-se</button>
+                </form>
+            </div> <!-- Fim da div.second-column -->
+        </div> <!-- Fim da div.content.first-content -->
+        
+        <!-- Segundo conteúdo -->
+        <div class="content second-content">
+            <div class="first-column">
+                <h2 class="title title-primary">Olá, Líder!</h2>
+                <p class="description description-primary">Cadastre-se inserindo suas informações corporativas</p>
+                <p class="description description-primary">e acompanhe o PA de sua equipe.</p>
+                <button id="cadastre" class="btn btn-primary">Cadastre-se</button>
+            </div> <!-- Fim da div.first-column -->
+
+            <div class="messages">
+                <ul>
+                    {% for message in messages %}
+                        <li style="color: rgb(8, 0, 0); font-weight: bold;">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Exibindo a mensagem de erro específica acima do campo de e-mail -->
+            {% if messages %}
+                <div class="form-error" style="color: red; font-weight: bold;">
+                    {% for message in messages %}
+                        {% if message == 'E-mail ou identificador inválidos.' %}
+                            <p>{{ message }}</p>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <div class="second-column">
+                <h2 class="title title-second">Entre para Acompanhar o PA 2025</h2>
+                <p class="description description-second">Seu identificador deve conter os <strong>dois primeiros e os dois últimos dígitos</strong> do seu CPF</p>  
+
+                <form id="form_log" method="POST" action="{% url 'form_log' %}" autocomplete="off">
+                    {% csrf_token %}
+                    
+                    <div class="input-email">
+                        <input type="email" name="email" id="email" placeholder="     Email" 
+                               pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required autocomplete="off">
+                    </div>
+                    
+                    <div class="input-identificador">
+                        <input type="password" name="identificador" id="identificador" placeholder="     Identificador" maxlength="4" required autocomplete="off">
+                    </div>
+                    
+                    <div class="button_container">
+                        <button class="btn btn-second" type="submit">Login</button>
+                    </div>
+                </form>
+            </div> <!-- Fim da div.second-column -->
+        </div> <!-- Fim da div.content.second-content -->
+    </div> <!-- Fim da div#container -->
+
+    <!-- Rodapé -->
+    <footer id="footer">
+        <p>Copyright 2025 - Todos os direitos reservados.</p>
+        <p>Feito por Universidade MV.</p>
+    </footer>
+</body>
+
+
+<script>
+
+var btnLogin = document.querySelector("#login");
+var btnCadastre = document.querySelector("#cadastre");
+var body = document.querySelector("body");
+
+btnLogin.addEventListener("click", function () {
+body.className = "login-js";
+});
+
+btnCadastre.addEventListener("click", function () {
+body.className = "cadastre-js";
+});
+
+
+
+</script>
+</html>

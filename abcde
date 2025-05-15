@@ -1,0 +1,48 @@
+
+<body id="body" data-show-popup="{{ show_popup }}">
+  <div id="password-change-popup" class="modal-password" style="display: none;">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <h2>Alterar Senha</h2>
+
+
+      <form method="post" action="{% url 'change_password' %}">
+        {% csrf_token %}
+
+
+        <label for="new-password">Digite a nova senha (4 dígitos):</label>
+
+        <input type="password" id="new-password" name="new-password" maxlength="4" pattern="\d{4}" required
+          placeholder="****" />
+
+
+        <button type="submit">Mudar senha</button>
+      </form>
+    </div>
+  </div>
+
+
+
+
+<div id="overlay" class="hide"></div>
+<!--Alteração de Senha-->
+<div id="change_password">
+    <div id="modal-body">
+    <p class="description_password">Altere sua senha para prosseguir</p>
+
+    
+    <form method="post" action="{% url 'change_password' %}">
+      {% csrf_token %}
+
+      
+    <label for="last-password">Informe a senha antiga</label>
+    <input id="last_password" name="last-password" maxlength="4" pattern="\d{4}" required placeholder="****" />
+
+
+    <label for="new-password">Informe a nova senha</label>
+    <input id="new-password" name="new-password" maxlength="4" pattern="\d{4}" required placeholder="****" />
+    <button type="submit">Alterar Senha</button>   
+
+
+    </div>
+</div>

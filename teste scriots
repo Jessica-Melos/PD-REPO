@@ -1,0 +1,159 @@
+/*para botão de diretoria, ajax
+
+document.getElementById("diretoria-popup").addEventListener("click", function () {
+    // Exemplo de ID de diretoria selecionado (isso deve ser dinâmico no real uso)
+    const idDiretoria = prompt("Digite o ID da Diretoria:");
+
+    if (!idDiretoria) {
+        alert("O ID da Diretoria é obrigatório.");
+        return;
+    }
+
+    // Envia a requisição para o servidor
+    fetch('/criar-mnemonico-diretoria/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken') // Função para capturar o CSRF token
+        },
+        body: JSON.stringify({
+            id_diretoria: idDiretoria
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            alert(`Erro: ${data.error}`);
+        } else {
+            alert(`Mnemônico criado: ${data.mnemonico}`);
+        }
+    })
+    .catch(error => console.error('Erro:', error));
+});
+
+// Função para obter o CSRF token
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.startsWith(name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
+para botão de area 
+
+document.getElementById("area-popup").addEventListener("click", function () {
+    // Exemplo de ID de área selecionado (isso deve ser dinâmico no real uso)
+    const idArea = prompt("Digite o ID da Área:");
+
+    if (!idArea) {
+        alert("O ID da Área é obrigatório.");
+        return;
+    }
+
+    // Envia a requisição para o servidor
+    fetch('/criar-mnemonico-area/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken') // Função para capturar o CSRF token
+        },
+        body: JSON.stringify({
+            id_area: idArea
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            alert(`Erro: ${data.error}`);
+        } else {
+            alert(`Mnemônico criado: ${data.mnemonico}`);
+        }
+    })
+    .catch(error => console.error('Erro:', error));
+});
+
+// Função para obter o CSRF token
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.startsWith(name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
+/* botão subarea
+
+document.getElementById("subarea-popup").addEventListener("click", function () {
+    // Exemplo de ID de área selecionado (isso deve ser dinâmico no real uso)
+    const idArea = prompt("Digite o ID da Área:");
+
+    if (!idArea) {
+        alert("O ID da Área é obrigatório.");
+        return;
+    }
+
+    // Campo para o nome da subárea
+    const subareaName = prompt("Digite o nome da Subárea:");
+
+    if (!subareaName) {
+        alert("O nome da Subárea é obrigatório.");
+        return;
+    }
+
+    // Envia a requisição para o servidor
+    fetch('/criar-mnemonico-subarea/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken') // Função para capturar o CSRF token
+        },
+        body: JSON.stringify({
+            id_area: idArea,
+            subarea_name: subareaName
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            alert(`Erro: ${data.error}`);
+        } else {
+            alert(`Mnemônico criado: ${data.mnemonico}`);
+        }
+    })
+    .catch(error => console.error('Erro:', error));
+});
+
+// Função para obter o CSRF token
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.startsWith(name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+*/
+

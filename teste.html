@@ -1,0 +1,658 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'back_log/css/estilo_gestor.css' %}">
+    <link rel="stylesheet" href="{% static 'back_log/css/global.css' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://universidademv.com.br/action/favicon.png?c=60">
+   <title>PA 2025</title>
+   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    </style>
+  <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma/bulma.css" rel="stylesheet"><!--SweetAlert-->
+  
+ 
+</head>
+
+<body>
+
+  <style>
+/*RESET*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+#all {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+body {
+  background-image: url("{% static 'back_log/css/images/PERFIL_CURSOS.png' %}");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-size: cover;
+  font-family: 'Open Sans', sans-serif;
+}
+.popup {
+  display: none;
+}
+.popup.show {
+  display: flex;
+}
+
+button{
+padding: 7px 20px;
+font-size: 16px;
+background: #2b4c5e;
+color: #eee;
+border-radius: 6px;
+border-style: hidden;
+transition: background-color 0.4s;
+cursor: pointer;
+}
+
+button:hover {
+background: rgb(230, 227, 227);
+color: #2b4c5e;}
+
+.PA{
+    background: url("{% static 'back_log/css/images/pilha-de-livros.png' %}") no-repeat left center;
+    background-size: 20px; 
+    padding-left: 30px; 
+  }
+  
+  .PD{
+    background: url("{% static 'back_log/css/images/leitura.png' %}") no-repeat left center;
+    background-size: 20px; 
+    padding-left: 30px; 
+    margin-top: 10px;
+  }
+
+  .COMPETENCIAS{
+    background: url("{% static 'back_log/css/images/habilidades.png' %}") no-repeat left center;
+    background-size: 20px; 
+    padding-left: 30px; 
+    margin-top: 10px;
+  } 
+  </style>
+
+<header id="profile">
+  <div id="profile-container">
+  <img src="{% static 'back_log/css/images/Usuário.png' %}" alt="ICONE_GESTOR" class="logo_icon" />
+  <div class="text-logo">
+    <p <label for="nome_gestor">{{ gestor.name_gestor }}</label>
+   <p <label for="diretoria_gestor">Diretoria Corporativa {{ gestor.id_diretoria.name_diretoria }}</label>
+     
+  <div id="saudacao">
+</div><!--Fim da text-logo-->   
+</div><!--Fim da div#profile-container-->
+
+</header>
+
+
+      <div id="logo_woman_inicial">
+        <img src="{% static 'back_log/css/images/LOGO_WOMAN.png' %}" alt="LOGO_WOMAN" id="logo_woman" />
+      </div>
+  
+      
+ <!-- Overlay para fundo escuro -->
+<div id="overlay" class="hide"></div>
+
+
+    <!--Popup de Instrução-->
+    <div id="modal-selection" class="hide">
+      <div id="modal-header">
+        <p class="modal-header__title">Orientações para Preenchimento do PA-2025</p>
+      </div>
+      <div id="modal-body">
+        <h2><b>Olá, líder! </b><br></h2>
+        <br>
+        <p>Para o Plano de Aprendizagem, você deverá indicar os cursos que considera fundamentais para o desenvolvimento específico de sua equipe.
+        Lembrando que este ano, o PA já conta com cursos <b>obrigatórios para todos</b> os colaboradores,  garantindo o alinhamento
+        com as diretrizes e competências essenciais da empresa.<br><br>
+                
+        Desse modo, você deve:</p>
+        <br>
+        <ol  style="padding-left: 20px;">
+          <li>Informar os cursos que melhor atendem às necessidades do seu time, alinhando-as às competências essenciais para o desempenho das atividades.</li><br>
+          <li>Atentar-se ao limite máximo da carga horária permitido para o Plano de Desenvolvimento (PA+PDI), que é de <b>30 horas</b>. <br>Caso ultrapasse esse limite, será necessário substituir ou excluir algum dos cursos informados. </li><br>
+          <li>Após a finalização do plano, você, com apoio do BP da área, monitorará o andamento do desenvolvimento da equipe por meio desse sistema, incluindo:</li><br>
+          <ul class="PD"  style="padding-left: 35px;">
+              <li class="PA"></i>Plano de Aprendizagem (PA)</li>
+              <li class="PDI">Plano de Desenvolvimento Individual (PDI) </li>
+              <li class="COMPETENCIAS">Mapeamento de Competências</li>
+          </ul><br>
+        </ol> 
+      </div><!--Fim da div#modal-body-->
+            <!--
+                <a class="modal-header__suporte" href="https://mail.google.com/mail/?view=cm&fs=1&to=universidade@mv.com.br" target="_blank" class="link_email">
+                  Em caso de dúvidas, entre em contato com a Universidade, <b>clicando aqui</b>. <img src="/LOGIN/IMAGES/ÍCONES/suporte-ao-cliente.png" alt="Enviar e-mail" width="20"> 
+                </a>-->
+  
+  
+      <!--Botão e Suporte-->
+      <div id="modal-footer">
+        <button id="continue-popup">Continuar</button> 
+        <div class="modal-footer__suporte">
+          
+          <!--Chat-->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+            <path fill-rule="evenodd" d="M4.804 21.644A6.707 6.707 0 0 0 6 21.75a6.721 6.721 0 0 0 3.583-1.029c.774.182 1.584.279 2.417.279 5.322 0 9.75-3.97 9.75-9 0-5.03-4.428-9-9.75-9s-9.75 3.97-9.75 9c0 2.409 1.025 4.587 2.674 6.192.232.226.277.428.254.543a3.73 3.73 0 0 1-.814 1.686.75.75 0 0 0 .44 1.223ZM8.25 10.875a1.125 1.125 0 1 0 0 2.25 1.125 1.125 0 0 0 0-2.25ZM10.875 12a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Zm4.875-1.125a1.125 1.125 0 1 0 0 2.25 1.125 1.125 0 0 0 0-2.25Z" clip-rule="evenodd" />
+          </svg>
+          
+            <a href="https://chat.google.com/?chat_id=universidade@mv.com.br" target="_blank" class="botao-contato"><img src="/chat_icon.png" title="Falar no chat" alt="Chat Google" width="20"></a>
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=universidade@mv.com.br" target="_blank" class="link_email"><img src="/email_icon.png" title="Enviar e-mail"alt="Chat Google" width="20"></a>
+        </div><!--Fim da div#modal-footer__suporte-->
+        </div><!--Fim da div#modal-footer-->
+          
+      </div><!--Fim da div#modal-selection-->
+
+
+      <form id="setar_banco" method="POST" action="{% url 'setar_banco' %}/">
+        {% csrf_token %}
+      
+        <!-- Informações dos Cursos -->
+        <div id="container">
+          <h2>Cadastro de Cursos</h2>
+      
+          <div id="input-container">
+            <span>Informe o nome do curso, sua carga horária e, <br>em seguida, clique em Adicionar.</span>
+      
+            <label for="curso">Nome do Curso:</label>
+            <input type="text" id="curso" name="curso" placeholder="Informe o Curso" required>
+      
+            <label for="carga">Carga Horária:</label>
+            <input type="number" id="carga" name="carga" placeholder="Carga Horária" min="1" required>
+      
+            <button id="mais" type="button" onclick="adicionarCurso()">
+              <img src="{% static 'back_log/css/images/adicionar (2).png' %}" alt="Adicionar Curso" title="Adicionar">
+            </button>
+          </div>
+        </div>
+      
+        <!-- Lista de Cursos -->
+        <div id="lista-container"> 
+          <h2>Lista de Cursos</h2>
+          <div id="listaCursos"></div>
+            
+          <div id="botoes-container">
+            <button id="btnConfirmar" type="button" onclick="confirmarCriacao()" class="disabled" disabled>Confirmar</button>
+            <button id="btnRemoverTachados" type="button" onclick="removerCursosTachados()">Excluir</button>
+            <button id="btnEditar" type="button" style="display:none;" onclick="voltarParaTelaInicial()">Editar</button>
+          </div>
+        </div>
+      
+        <!-- Popup de Confirmação -->
+        <div id="popup" style="display:none;">
+          <p>Tem certeza que deseja confirmar a adição dos cursos listados?</p>
+          <button id="btnCancelar" type="button" onclick="fecharPopup()">Cancelar</button>
+          <button id="btnConfirmarSecond" type="submit" class="disabled" disabled>Confirmar</button>
+        </div>
+      </form>
+      
+      <!--Carga Horária-->
+      <div id="total-horas">
+        <p class="total-horas__text"><strong>Total de Carga Horária:</strong>
+        <span id="totalCarga">0</span> <span id="unidadeHoras">horas</span></p>
+      </div>
+      
+<!-- Lista de Colaboradores Elegíveis -->
+<div id="colab-eleg">
+  <h2 id="colaboradores">Colaboradores Elegíveis</h2>
+  <div id="listaColab" style="max-height: 200px; overflow-y: auto; padding: 10px;">
+    <ul style="list-style: none; padding: 0; margin: 0;">
+      {% for colaborador in colaboradores %}
+        <li style="padding: 6px 0; border-bottom: 1px solid #ccc;">{{ colaborador.nome }}</li>
+      {% empty %}
+        <li>Nenhum colaborador elegível encontrado.</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+      <!-- Avatar e balão de Diálogo -->
+      <div id="logo_perfil_woman">
+        <img src="{% static 'back_log/css/images/Avatar_05.png' %}" alt="LOGO_perfil" id="logo_perfil" />
+      </div>
+      <div id="dialogo">
+        <img src="{% static 'back_log/css/images/Balão_Diálogo_ (3).png' %}" alt="balão_fala" id="balão_fala"/>
+      </div>
+
+  <!--Modal de Aviso-->
+  <div id="modal-aviso" class="modal-aviso">
+    <div class="modal-conteudo">
+      <span class="fechar-aviso">&times;</span>
+      <p id="mensagemModal"></p>
+      <button id="btnFecharModal">Fechar</button>
+      <div id="popup-tempo">
+        <p id="alerta" style="display: none;">Limite de 30h excedido! Exclua um curso ou entre em contato.</p>
+        </div>
+      </div>
+    </div>
+  
+<!--Mudança-->
+
+
+<!--Rodapé-->
+  <footer id="footer">
+    <p>Copyright 2025 - Todos os direitos reservados.</p>
+    <p>Feito por Universidade MV.</p>
+  </footer>
+
+  
+
+
+
+      
+      
+      
+      
+      
+      
+     
+      </body>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+  const closeModalButton = document.querySelector("#continue-popup"); 
+  const modal = document.querySelector("#modal-selection");
+  const overlay = document.querySelector("#overlay");
+  const cursos = document.querySelector("#container");
+  const lista_adc = document.querySelector("#lista-container");
+  const logo_woman = document.querySelector("#logo_woman");
+  const logo_perfil = document.querySelector("#logo_perfil");
+  const balao_fala = document.querySelector("#balão_fala");
+  const lista = document.querySelector("#colab-eleg");
+  const horas = document.querySelector("#total-horas");
+
+  // Exibir popup automaticamente ao carregar a página
+  if (modal && overlay) {
+      modal.classList.remove("hide");
+      overlay.classList.remove("hide"); 
+  }
+
+  if (closeModalButton) {
+    closeModalButton.addEventListener("click", () => {
+        if (modal){
+          modal.remove();
+        }
+        if (overlay){
+          overlay.classList.add("hide");
+        }
+        if (cursos){
+           cursos.style.display = "block";
+        }
+        if(lista_adc){
+          lista_adc.style.display = "block";
+        }
+        if (logo_woman) {
+            logo_woman.style.display = "none"; 
+        }
+        if(logo_perfil){
+            logo_perfil.style.display="block";
+        }
+        if(balao_fala){
+            balao_fala.style.display="block";
+        }
+        if(lista){
+            lista.style.display = "block";
+        }
+        if(horas){
+            horas.style.display = "block";
+        }
+    });
+  }
+});
+
+
+let totalHoras = 0;
+const NUMERO_LINHAS = 10; // Número fixo de linhas
+
+function inicializarListaCursos() {
+    let lista = document.getElementById("listaCursos");
+    lista.innerHTML = ""; // Limpa a lista existente
+
+    for (let i = 0; i < NUMERO_LINHAS; i++) {
+        let divCurso = document.createElement("div");
+        divCurso.classList.add("curso-item", "curso-item-oculto");
+        divCurso.dataset.index = i; // Adiciona um índice para rastrear a linha
+
+        let labelCurso = document.createElement("label");
+        labelCurso.classList.add("curso-label");
+
+        let checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.onchange = function() { tacharCurso(this); };
+
+        let textoCurso = document.createTextNode(""); // Inicialmente vazio
+
+        labelCurso.appendChild(checkbox);
+        labelCurso.appendChild(textoCurso);
+
+        divCurso.appendChild(labelCurso);
+        lista.appendChild(divCurso);
+    }
+}
+
+
+function atualizarTextoCarga (){
+
+    let totalCarga = document.getElementById("totalCarga");
+    let valor = parseInt(totalCarga.textContent,10);
+
+    // Ajusta o texto para singular ou plural
+    if (valor === 1) {
+        totalCarga.nextSibling.nodeValue = " hora"; // Ajusta para "hora"
+    } else {
+        totalCarga.nextSibling.nodeValue = " horas"; // Ajusta para "horas"
+    }
+}
+
+// Exemplo: chamar essa função sempre que o valor for atualizado
+document.addEventListener("DOMContentLoaded", atualizarTextoCarga);
+
+let cursosAdicionados = []; // Array para rastrear os cursos adicionados
+
+function adicionarCurso() {
+    let nomeCurso = document.getElementById("curso").value.toUpperCase();
+    let cargaHoraria = parseInt(document.getElementById("carga").value);
+   
+
+    if (nomeCurso && cargaHoraria > 0) {
+
+        let cursoJaExiste = cursosAdicionados.some(curso => curso.nome == nomeCurso);
+
+        if (cursoJaExiste){
+            exibirModalAviso("Este curso já foi adicionado");
+            return; 
+        }
+
+        if (cursosAdicionados.length < NUMERO_LINHAS) {
+            totalHoras += cargaHoraria;
+            let lista = document.getElementById("listaCursos");
+
+            // Criando a linha do curso dinamicamente
+            let divCurso = document.createElement("div");
+            divCurso.classList.add("curso-item");
+            divCurso.dataset.index = cursosAdicionados.length;
+
+            let labelCurso = document.createElement("label");
+            labelCurso.classList.add("curso-label");
+
+            let checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.classList.add("curso-checkbox"); // Adiciona uma classe para estilização
+            checkbox.style.display = "inline-block"; // Garante que ele fique visível
+            checkbox.onchange = function() { tacharCurso(this); };
+
+            let nomeCursoMaiusculo = nomeCurso.toUpperCase();
+            let textoCurso = document.createTextNode(` ${nomeCursoMaiusculo} - ${cargaHoraria}h`);
+
+            labelCurso.appendChild(checkbox);
+            labelCurso.appendChild(textoCurso);
+            divCurso.appendChild(labelCurso);
+
+            lista.appendChild(divCurso); // Adiciona o curso na lista
+            
+
+
+
+            // Adicionando ao array de cursos
+            cursosAdicionados.push({
+                index: cursosAdicionados.length,
+                nome: nomeCursoMaiusculo,
+                horas: cargaHoraria,
+                tachado: false
+            });
+
+            document.getElementById("totalCarga").innerText = totalHoras;
+            verificarLimite();
+        } else {
+            exibirModalAviso("Limite de cursos atingido.");
+        }
+    }
+}
+
+
+
+function encontrarLinhaVazia() {
+    let lista = document.getElementById("listaCursos");
+    let linhas = lista.querySelectorAll(".curso-item");
+    for (let linha of linhas) {
+        if (linha.querySelector(".curso-label").childNodes[1].textContent === "") {
+            return linha;
+        }
+    }
+    return null;
+}
+
+function tacharCurso(checkbox) {
+    let label = checkbox.parentElement;
+    let linha = label.parentElement;
+    let index = parseInt(linha.dataset.index);
+
+    let curso = cursosAdicionados.find(c => c.index === index);
+    if (curso) {
+        curso.tachado = checkbox.checked;
+        if (checkbox.checked) {
+            label.style.textDecoration = "line-through";
+        } else {
+            label.style.textDecoration = "none";
+        }
+    }
+}
+function btnExcluir() {
+    // Filtra os cursos tachados
+    let cursosTachados = cursosAdicionados.filter(curso => curso.tachado);
+    
+    // Se não houver cursos tachados, exibe um alerta
+    if (cursosTachados.length === 0) {
+        exibirModalAviso("Não há cursos tachados para excluir.");
+        return;
+    }
+    
+    // Para cada curso tachado, remove o elemento correspondente da lista
+    cursosTachados.forEach(curso => {
+        let linhaCurso = document.querySelector(`.curso-item[data-index="${curso.index}"]`);
+        if (linhaCurso) {
+            linhaCurso.remove(); // Remove o curso da lista
+        }
+    });
+    
+    // Atualiza a lista de cursos após a remoção
+    cursosAdicionados = cursosAdicionados.filter(curso => !curso.tachado);
+    
+    // Recalcula o total de horas
+    totalHoras = cursosAdicionados.reduce((sum, curso) => sum + curso.horas, 0);
+    document.getElementById("totalCarga").innerText = totalHoras;
+
+    // Verifica o limite de horas
+    verificarLimite();
+}
+function verificarLimite() {
+    let botao = document.getElementById("btnConfirmar");
+    let alerta = document.getElementById("alerta");
+    if (totalHoras > 30) {
+        botao.classList.add("disabled");
+        botao.disabled = true;
+        alerta.style.display = "block";
+    } else {
+        botao.classList.remove("disabled");
+        botao.disabled = false;
+        alerta.style.display = "none";
+    }
+}
+
+function fecharPopup() {
+    document.getElementById("popup").style.display = "none";
+    overlay.classList.add("hide");
+ 
+}
+
+function confirmarCriacao() {
+    document.getElementById("popup").style.display = "block";
+    document.getElementById("btnConfirmarSecond").disabled = false;  // Ativa o botão de confirmação
+    document.getElementById("btnConfirmarSecond").classList.remove("disabled");  // Remove a classe "disabl
+    overlay.classList.remove("hide");
+}
+
+
+function fecharPopup() {
+    document.getElementById("popup").style.display = "none";
+    overlay.classList.add("hide");
+ 
+}
+
+
+document.getElementById("btnConfirmarSecond").addEventListener("click", function () {
+    document.getElementById("setar_banco").submit();  // Envia o formulário
+});
+// Modal de aviso
+const modalAviso = document.getElementById("modal-aviso");
+const mensagemModal = document.getElementById("mensagemModal");
+const btnFecharModal = document.getElementById("btnFecharModal");
+const fecharModalSpan = document.querySelector("#modal-aviso .fechar-aviso");
+
+function exibirModalAviso(mensagem) {
+  mensagemModal.textContent = mensagem;
+  modalAviso.style.display = "flex";
+}
+
+function fecharModalAviso() {
+  modalAviso.style.display = "none";
+}
+
+btnFecharModal.onclick = fecharModalAviso;
+fecharModalSpan.onclick = fecharModalAviso;
+
+window.onclick = function(event) {
+  if (event.target == modalAviso) {
+    fecharModalAviso();
+  }
+};
+
+
+function fecharModalAviso() {
+  modalAviso.style.display = "none"
+}
+
+
+closeModalButton.addEventListener("click", () => {
+    modal.classList.add("hide");
+    overlay.classList.add("hide");
+    if (cursos) cursos.style.display = "block";
+    if (lista_adc) lista_adc.style.display = "block";
+    if (logo_woman) logo_woman.style.display = "none";
+    if (logo_perfil) logo_perfil.style.display = "block";
+    if (balao_fala) balao_fala.style.display = "block";
+});
+
+
+btnFecharModal.onclick = fecharModalAviso;
+fecharModalSpan.onclick = fecharModalAviso;
+
+window.onclick = function(event) {
+    if (event.target == modalAviso) {
+        fecharModalAviso();
+    }
+};
+
+
+//Desabilitar o botão "Confirmar"
+let botaoConfirmar = document.getElementById("btnConfirmar");
+if(botaoConfirmar){
+    botaoConfirmar.style.display ="none";
+    }
+
+
+let listaHabilitada = true;
+
+function exibirListaCursos(){
+    // Esconder todos os elementos da página, exceto a lista de cursos
+    let elementosParaOcultar = document.querySelectorAll("#container, #modal-selection, #overlay, #logo_woman, #balão_fala, #logo_perfil, #btnRemoverTachados");
+    elementosParaOcultar.forEach(elemento => {
+        if (elemento) {
+            elemento.style.display = "none";
+        }
+    });
+
+    // Exibir apenas a lista de cursos adicionados
+    let lista_adc = document.getElementById("lista-container");
+    if (lista_adc) {
+        lista_adc.style.display = "block";
+        lista_adc.style.width = "40%";
+        lista_adc.style.position = "absolute";
+       
+    }
+
+    // Ajustar o tamanho da lista para melhor visualização
+    let listaCursos = document.getElementById("listaCursos");
+    if (listaCursos) {
+        listaCursos.style.fontSize = "18px"; // Aumentar a fonte para melhor leitura
+        listaCursos.style.padding = "10px"; // Adicionar espaçamento interno
+        listaCursos.style.backgroundColor = "#fff"; // Fundo branco para melhor contraste
+
+        
+    let cursos = listaCursos.querySelectorAll (".curso-item");
+    cursos.forEach(curso => curso.classList.add("curso-desabilitado"));
+    
+    }
+// Exibe o botão "Editar"
+let botaoEditar = document.getElementById("btnEditar");
+if (botaoEditar) {
+    botaoEditar.style.display = "block"; // Garante que o botão "Editar" seja exibido
+    botaoEditar.style.margin = "auto"; // Centraliza o botão
+    botaoEditar.style.marginTop = "20px"; // Adiciona um espaçamento acima do botão
+    }
+
+    let cursos = listaCursos.querySelectorAll(".curso-item");
+    cursos.forEach(curso => {
+        let checkbox = curso.querySelector("input[type='checkbox']");
+        let botaoExcluir = curso.querySelector(".botao-excluir");
+    
+        if (checkbox) {
+            checkbox.disabled = true; // Desabilita o checkbox
+            checkbox.style.display = "none"; // Oculta o checkbox
+        }
+        if (botaoExcluir) {
+            botaoExcluir.style.display = "none"; // Oculta o botão de exclusão
+        }
+    });
+    
+
+}
+
+
+
+//Saudação
+function saudacao() {
+    const agora = new Date();
+    const diaSemana = agora.toLocaleDateString("pt-BR", { weekday: "long" });
+    const dia = agora.getDate();
+    const mes = agora.toLocaleDateString("pt-BR", { month: "long" });
+    const ano = agora.getFullYear();
+    const hora = agora.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+  
+    let saudacao;
+    const horaAtual = agora.getHours();
+  
+    if (horaAtual >= 6 && horaAtual < 12) {
+      saudacao = "Bom dia!";
+    } else if (horaAtual >= 12 && horaAtual < 18) {
+      saudacao = "Boa tarde!";
+    } else {
+      saudacao = "Boa noite!";
+    }
+  
+    const mensagem = `<b>${saudacao}</b> Hoje é ${diaSemana}, ${dia} de ${mes} de ${ano}, e agora são ${hora}.`;
+    document.getElementById("saudacao").innerHTML = mensagem;
+  }
+  
+  saudacao();
+  </script>

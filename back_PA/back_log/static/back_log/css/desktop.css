@@ -1,0 +1,142 @@
+/*Tela de 1440px ou mais*/
+
+@media screen and (min-width: 1600px) {
+
+/*Perfil do Gestor*/
+    .nome_gestor, .nome_diretoria {
+        position: fixed;
+        margin-left:4% ;
+     }
+
+     #saudacao{
+        position: relative;
+        right: 22%;
+    } 
+
+    #logo_woman{
+        max-width: 90vw; 
+        width: 720px;
+        margin-top: 10px;
+        margin-left: -1%;
+    }
+
+    #modal-selection{
+        width: 750px;
+        max-width: 100%;
+        height: 735px;
+    }
+      
+
+    .modal-header__title{
+        margin-top: -8px;
+    }
+    #modal-body .instruction-01, li, ol, .modal{
+        position: relative;
+        top: 30px;
+        margin-top: 5px;
+        line-height: 1.4;
+    }
+      
+    #continue-popup{
+        position: relative;
+        top: 45px;
+        left: 20%;
+    }
+
+    .logout button{
+        position: absolute;
+        width: 100%;
+        margin-top: 30.5em;
+    }
+      
+    #container{
+        display: none;
+        position: relative;
+        left: 48%; 
+        margin-top: -1%;
+       
+    }
+
+ 
+    #input-container span{
+        margin-top: -5%;
+        margin-left: 30%;  
+    }
+
+    input { 
+        top: 10px;
+    }
+       
+
+    .botao-adicionar {
+        margin-top: 4%;
+        left: 56%;
+    }
+
+
+    .botao-pa{
+        position: absolute;
+        margin-top: -5%;
+        left: 100%;
+        transform: translateX(-20%);
+    }
+     
+    #listaCursos{
+        margin: 26px auto; 
+    }
+
+
+    #lista-container{      
+        left: 48%;
+        margin-top: -10%;   
+    }
+
+    .total-horas__text{
+        transform: translate(85%);
+    }
+    #total-horas{
+        margin-top: 12%;
+    }
+
+    #botoes-container{
+        display: flex;
+        position: fixed;
+        margin-top: -36%;
+        width: 120px;
+        padding: 34%;
+    
+    }
+
+
+    #colab-eleg {
+        position: relative;	
+        margin-top: -17%;}
+      
+
+
+
+
+
+
+
+    #pa-nome-selecionado{
+        margin-top: -10px;
+    }
+
+    .title_area{
+        right: 42%;
+    }
+
+
+    
+
+
+    #text-logo{
+        position: absolute;
+        left: 10%;
+    }
+
+    #footer{
+        margin: 0 auto;
+    }
+}

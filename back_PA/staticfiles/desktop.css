@@ -1,0 +1,66 @@
+/*Tela de 1440px ou mais*/
+
+@media screen and (min-width: 1025px) and (max-width: 1920px) {
+
+  
+
+/*Login*/
+
+
+  #container{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+    z-index: 1;
+    color: blue;
+}
+    #saudacao{
+        right: 50%;
+    }
+
+    #lista-container{      
+        position:relative;
+        top:22%;
+        left: 15%;    
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;  
+        padding:10%;
+    }
+
+    #pa-nome-selecionado{
+        margin-top: -5px;
+    }
+
+    .title_area{
+        right: 42%;
+    }
+
+
+    #botoes-container{
+        margin: 0 auto;
+    }
+
+   
+    #total-horas{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 42px auto;
+        color: #8a8888;
+        z-index: 10;
+        font-size: 16px;
+        gap: 5px;
+    }
+
+    #text-logo{
+        position: absolute;
+        left: 10%;
+    }
+
+    #footer{
+        margin: 0 auto;
+    }
+}
