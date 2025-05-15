@@ -20,7 +20,7 @@
   <style>
 
     body {
-      background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0,0,0,0.8)), url("{% static 'back_log/css/images/PERFIL_CURSOS.png' %}");
+      background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0,0,0,0.9)), url("{% static 'back_log/css/images/PERFIL_CURSOS.png' %}");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -72,12 +72,10 @@
     <header id="profile">
       <div id="profile-container">
         <img src="{% static 'back_log/css/images/Usuário.png' %}" alt="ICONE_GESTOR" class="logo_icon" />
-
         <div class="text-logo">
           <p class="nome_gestor"> <label for="nome_gestor">{{ gestor.name_gestor }}</label></p>
-            <p class="nome_diretoria"> <label for="diretoria_gestor">Diretoria Corporativa {{ gestor.id_diretoria.name_diretoria }}</label></p>
-    
-         
+          <p class="nome_diretoria"> <label for="diretoria_gestor">Diretoria Corporativa {{ gestor.id_diretoria.name_diretoria }}</label></p>
+          <div id="pa-nome-selecionado" class="campo-nome-pa">Nome do PA selecionado</div>
         </div><!--Fim da text-logo-->   
       </div><!--Fim da div#profile-container-->
 
@@ -119,6 +117,7 @@
 
     <!--Overlay-->
     <div id="overlay" class="hide"></div>
+  
 
     <!--Popup de Instrução-->
     <div id="modal-selection" class="hide">
@@ -127,7 +126,7 @@
       </div>
       <div id="modal-body">
         <h2 class="modal"><b>Olá, líder! </b></h2>
-        <br>
+       <br>
         <p class="instruction-01">Você deverá indicar os cursos que considera fundamentais para o desenvolvimento específico de sua equipe no Plano de Aprendizagem.
         Lembrando que este ano, o PA já conta com cursos <b>obrigatórios para todos</b> os colaboradores,  garantindo o alinhamento
         com as diretrizes e competências essenciais da empresa.<br><br>
@@ -135,7 +134,7 @@
         Caso você possua mais de uma área sob sua responsabilidade, é necessário preencher os cursos separadamente para cada Plano de Aprendizagem (PA).
          Para isso, selecione o PA correspondente na área de cadastro de cursos antes de incluir as informações.<br><br>
 
-              
+          
         Desse modo, você deve:</p>
     
         <ol  style="padding-left: 20px;">
@@ -215,23 +214,13 @@
 
     <!--Carga Horária-->
     <div id="total-horas">
-      <p class="total-horas__text"><strong>Total de Carga Horária:</strong>
+      <p class="total-horas__text"><strong>Carga Horária Total:</strong>
       <span id="totalCarga">0</span> <span id="unidadeHoras">horas</span></p>
     </div>
 
 <!-- Lista de Colaboradores Elegíveis -->
 <style>
-  #listaColab {
-    display: block;
-    flex-direction: column;
-    position: relative;
-    height: 350px;
-    max-height: 800px; /* Altura máxima antes de ativar a rolagem */
-    width: 160%; /* Ocupa toda a largura disponível */
-    left: -25%;
-    top: -50px; 
-    overflow-y:scroll;
-  }
+ 
 
   #listaColab li {
     display: flex;
@@ -253,29 +242,13 @@
   margin: 5px 0;
 }
 
-#search {
-  width: 160%;
-  padding: 8px;
-  top: -70px;
-  left: -25%;
-  border-radius: 15px;
-  border: 1px groove rgb(214, 209, 209);
 
-}
 
 input[type="text"],
 input[type="number"] {
   box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.1);
 }
-.icon {
-  position: absolute;
-  top: 17%;
-  left: 86px;
-  transform: translateY(-50%);
-  font-size: 16px;
-  color: #888;
-  pointer-events: none;
-  z-index: 10;}
+
 
 
 </style>

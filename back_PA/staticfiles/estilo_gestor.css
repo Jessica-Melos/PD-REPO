@@ -29,37 +29,36 @@ html, body{
    
   }
 
-.nome_gestor {
-    position: fixed;
+/*Alterado em 15/05/2025*/
+.text-logo{
+  position: relative;
+  margin-left:6%;
+  top: 3%;
+  max-width: 500px;
+  display: block;
+  z-index: 20;
+  line-height: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.nome_gestor { 
     color: #f9f8f8;
     font-size: 18px;
     font-weight: 700;
-    margin-bottom: 0;
-    z-index: 20;
-    max-width: 500px;
-    overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    margin-top: -1.2%;
-    margin-left:5% ;
   }
   
 .nome_diretoria {
-    position: fixed;
     color: #A8C69F;
     font-size: 14px;
     font-weight: 500;
-    margin: 0;
-    padding:0;
     margin-top: 2px;
-    margin-left: 5%;
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    z-index: 20;
-    
+    text-overflow: ellipsis;  
   }
-  
+/*Fim da alteração*/
+
 
   .menu-container {
     position: relative;
@@ -219,54 +218,53 @@ html, body{
     position:fixed;
     top:0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background-color: rgba(0,0,0,0.6);
     pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     z-index: 1;
 }
 
-
-
-/*Popup de Instrução*/
+/*Alteração em 15/05/2025*/
 #modal-selection{
-    position:fixed;
-    left: 49%; 
-    top:50%;
-    transform: translate(-50%, -50%);
-    background: #faf8f8;
-    z-index: 1;
-    width: 700px;
-    max-width: 100%;
-    height: 620px;
-    padding: 3.3rem;
-    border-radius: 0.5rem;
-    box-shadow: 0px 4px 15px rgba(94, 93, 93, 0.9);
-    transition: opacity 0.8s ease-in-out;
-}
-
+  display: flex;
+  position: fixed;
+  width: 45%;
+  left: 25%;
+  top:10%;
+  max-width: 50%;
+  background: #faf8f8;
+  border-radius: 0.5rem;
+  padding: 2.7rem;
+  box-shadow: 0px 4px 15px rgba(94, 93, 93, 0.9);
+  z-index: 2;
+  transition: opacity 0.8s ease-in-out;}
+ 
 #modal-header{
     display: flex;
     font-weight: bold;
     color: #0a8b77;
-    font-size: 15px;
+    font-size: 12px;
     justify-content: center;
 }
-
+/* Excluir esse bloco
 .modal-header__title{
     color: #0a8b77;
     text-decoration: none;
     font-size: 14px;
     margin-top: -15px;
-  }
+  }*/
   
   #modal-body .instruction-01, li, ol, .modal{
     position: relative;
     top: 13px;
     margin-top: 5px;
-    font-size: 12px;
+    font-size: 10px;
     color: #686666;
-    text-align:start;
+    text-align:justify;
     line-height: 1.4;
   }
   
@@ -278,25 +276,25 @@ html, body{
     text-align:start;
   }
   
-#modal-footer{
-    position: relative;
-    margin-top: 2.3rem;
-    width: 110px;
-    height: 100px;
-    margin-left: 17rem;
-    z-index: 100;
-    justify-content: space-between;
-}
-#continue-popup{
-  position: relative;
-  top: -4px;
-  left: -20px;
-}
+/*Alterado em 15/05/2025*/
+  #modal-footer{
+    display: flex;
+    z-index: 3;
+  }
+  #continue-popup {
+   position: relative;
+   left: 41%;
+   margin-top: 6%;
 
-#continue-popup:hover{
+    
+    
+  }
+
+  #continue-popup:hover{
     transform: scale(1.1); 
   }
 
+  /* Excluir esse bloco
 .modal-footer__suporte span{
     text-align: center;
     bottom:8px;
@@ -310,7 +308,7 @@ html, body{
     display: inline-flex;
     gap: 1px;
     align-items: center;
-   }
+   }*/
   
 #modal-selection, #overlay{
     display: block;
@@ -563,7 +561,7 @@ input::placeholder{color: #b9b7b7;}
 }
 
 
-#colab-eleg {
+  #colab-eleg {
     display: none;
     position: relative;
     left: 30.7%;
@@ -576,8 +574,41 @@ input::placeholder{color: #b9b7b7;}
     justify-content: center;
     margin-top: -11.5%;
     box-shadow: 0 1px 15px rgb(248, 247, 247); 
-   
 }
+  #search{
+    position: absolute;
+    width: 90%;
+    padding: 8px;
+    top: 15%;
+    left: 5%;
+    border-radius: 15px;
+    border: 1px groove rgb(214, 209, 209);}
+
+    .icon {
+      position: absolute;
+      top: 17%;
+      left: 86px;
+      transform: translateY(-50%);
+      font-size: 16px;
+      color: #888;
+      pointer-events: none;
+      z-index: 10;
+  }
+
+  #listaColab {
+    display: block;
+    flex-direction: column;
+     position: relative;
+    /* height: 350px; */
+    max-height: 800px;
+    width: 160%;
+    left: -25%;
+    top: 6%;
+    overflow-y: scroll;
+}
+
+
+
 
 #ul, li{
     padding: 0;
@@ -632,7 +663,6 @@ input::placeholder{color: #b9b7b7;}
 }
 
 .curso-label {
-    display: flex;
     align-items: center;
     white-space: nowrap;
     margin-top: 1%;
@@ -743,19 +773,20 @@ input::placeholder{color: #b9b7b7;}
 }
 
 
-/*Avatar 01*/
+/*Avatar - Alteração 15/05/2025 */
 #logo_woman_inicial {
-    position: absolute;
+    position: relative;
     bottom: 0; 
-    right: -1px; 
     margin-bottom: auto;
-    z-index: 2;
+    z-index: 3;
   }
   #logo_woman {
-    display: block;
-    max-width: 90vw; 
-    width: 570px;
-    margin-top: 10px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    max-width: 40vw;
+    height: auto;
+  
   }
 
 
@@ -791,26 +822,25 @@ input::placeholder{color: #b9b7b7;}
 
 /*Footer*/
 #footer{
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    text-align: center;
-    padding: 9px;
-    display: flex;
-    font-size: 8px;
-    font-family: Poppins;
-    color: rgb(184, 185, 184);
-    line-height: 10px;
-    justify-content: center;
-    gap: 8px;
-    opacity: 0.4;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  text-align: center;
+  display: flex;
+  font-size: 8px;
+  color: rgb(184, 185, 184);
+  line-height: 10px;
+  justify-content: center;
+  gap: 8px;
+  opacity: 0.4;
 }
 
+/*Excluir esse bloco
 .footer-text {
     display: flex;
     flex-direction: column;
-  }
+  }*/
   
   .logo_mv {
     width: 17px;

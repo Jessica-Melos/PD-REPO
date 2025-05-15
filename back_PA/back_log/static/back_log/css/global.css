@@ -149,30 +149,3 @@ color: #ffffff;}
 
 
 
-/*Footer*/
-#footer{
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  padding: 9px;
-  display: flex;
-  font-size: 8px;
-  font-family: Poppins;
-  color: rgb(184, 185, 184);
-  line-height: 10px;
-  justify-content: center;
-  gap: 8px;
-  opacity: 0.4;
-}
-
-.footer-text {
-  display: flex;
-  flex-direction: column;
-}
-
-.logo_mv {
-  width: 17px;
-  height:12px;
-}

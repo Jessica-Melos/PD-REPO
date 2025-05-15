@@ -57,15 +57,15 @@ WSGI_APPLICATION = 'back_PA.wsgi.application'
 
 
 # LOGIN_URL = '/pagina'
-
+#mexi aqui na senha e porta
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'opr',
         'USER': 'root',
-        'PASSWORD': '3319',
+        'PASSWORD': '0810',
         'HOST': '127.0.0.1',
-        'PORT': '3306',
+        'PORT': '3307',
     }
 }
 

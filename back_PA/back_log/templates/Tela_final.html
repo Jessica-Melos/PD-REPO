@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'back_log/css/final.css' %}">
-    <link rel="stylesheet" href="{% static 'back_log/css/large-desktop.css' %}">   
+    <!--<link rel="stylesheet" href="{% static 'back_log/css/desktop.css' %}"> -->
     <link rel="stylesheet" href="{% static 'back_log/css/global.css' %}">
     <link rel="icon" type="image/png" sizes="16x16" href="https://universidademv.com.br/action/favicon.png?c=60">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -116,7 +116,7 @@
 </div>
 
   <div id="botoes-container">
-    <button id="btnEditar" style=" align-self: center;">Editar</button>
+    <button id="btnEditar">Editar</button> <!--Tirar o style-->
   </div>
 
 
@@ -221,6 +221,7 @@ let listaHabilitada = true;
 
     
 // Exibe o botão "Editar"
+/* Se não influenciar em nada, excluir essas linhas comentadas
 let botaoEditar = document.getElementById("btnEditar");
 if (botaoEditar) {
 botaoEditar.style.display = "flex";
